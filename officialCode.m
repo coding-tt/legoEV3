@@ -23,12 +23,11 @@ while 1
     distanceFront = brick.UltrasonicDist(4);
     display("Front distance: " + distanceFront);
 
-    %
+    % NEED TO FIX: Color sensor
     % color_rgb = brick.ColorCode(2);
     % disp(color_rgb);
 
-
- % testing grabber
+    % TEST: Grabber code
     % brick.MoveMotor('D', 50);
     % pause(1);
     % brick.MoveMotor('BC', 30);
@@ -37,25 +36,15 @@ while 1
     % brick.MoveMotor('D',-100);
     % pause(2);
     % brick.MoveMotor('D', 0);
-    
+
+   % NEED TO FIX: Code to navigate maze. Keeps moving forward, following right wall and turns right if right wall is not detected
     while distanceFront > 20 && distanceRight < 50 
         brick.MoveMotor('BC', 50);
         distanceRight = brick.UltrasonicDist(3);
         distanceFront = brick.UltrasonicDist(4);
     end
     pause(1);
-    brick.MoveMotor('BC', 0);
-    % brick.MoveMotorAngleRel('C', 25, -330, 'Coast');
-    %% 
-    %% 
-
-    % if distanceRight > 25
-    %     brick.MoveMotorAngleRel('C', 25, -330, 'Coast');
-    %     pause(3);
-    %     brick.StopMotor('C', 'Coast');
-    %     brick.MoveMotor('BC', 50);
-    %     pause(3);
-    % end
-    % brick.MoveMotor('BC', 0);
+    brick.MoveMotor('BC', 0); % All wheels stop
+    % brick.MoveMotorAngleRel('C', 25, -330, 'Coast'); % Brick turns right
     
 end
