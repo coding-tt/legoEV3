@@ -10,11 +10,11 @@
 
 while 1
 
-    pause(0.5)
-    distanceRight = brick.UltrasonicDist(3);
-    display("Right distance: " + distanceRight);
-    distanceFront = brick.UltrasonicDist(4);
-    display("Front distance: " + distanceFront);
+    
+    % distanceRight = brick.UltrasonicDist(3);
+    % display("Right distance: " + distanceRight);
+    % distanceFront = brick.UltrasonicDist(4);
+    % display("Front distance: " + distanceFront);
     color_rgb = brick.ColorCode(1);
     display("color: " +color_rgb);
 
