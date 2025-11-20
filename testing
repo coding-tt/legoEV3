@@ -1,0 +1,32 @@
+        switch key
+            % FORWARD
+            case {'uparrow', 'w'}
+                start(mA, forwardSpeed);
+                start(mB, forwardSpeed);
+
+            % BACKWARD
+            case {'downarrow', 's'}
+                start(mA, -forwardSpeed);
+                start(mB, -forwardSpeed);
+
+            % TURN LEFT
+            case {'leftarrow', 'a'}
+                start(mA, -turnSpeed);
+                start(mB,  turnSpeed);
+
+            % TURN RIGHT
+            case {'rightarrow', 'd'}
+                start(mA,  turnSpeed);
+                start(mB, -turnSpeed);
+
+            % STOP
+            case {'space'}
+                stop(mA, 1);
+                stop(mB, 1);
+
+            % QUIT PROGRAM
+            case {'q'}
+                running = false;
+                stop(mA, 1);
+                stop(mB, 1);
+                close(fig);
