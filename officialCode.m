@@ -7,21 +7,17 @@
 % Port C: Right Motor               5   Red
 % Port D: Claw
 % brick.SetColorMode(1, 2);
-
 while 1
-
-    
-    % distanceRight = brick.UltrasonicDist(3);
-    % display("Right distance: " + distanceRight);
-    % distanceFront = brick.UltrasonicDist(4);
-    % display("Front distance: " + distanceFront);
+    distanceRight = brick.UltrasonicDist(3);
+    display("Right distance: " + distanceRight);
+    distanceFront = brick.UltrasonicDist(4);
+    display("Front distance: " + distanceFront);
     color_rgb = brick.ColorCode(1);
     display("color: " +color_rgb);
 
     % NEED TO FIX: Color sensor
     % color_rgb = brick.ColorCode(2);
     % disp(color_rgb);
-
     % TEST: Grabber code
     % brick.MoveMotor('D', 50);
     % pause(1);
@@ -33,24 +29,36 @@ while 1
     % brick.MoveMotor('D', 0);
 
    % NEED TO FIX: Code to navigate maze. Keeps moving forward, following right wall and turns right if right wall is not detected
-    % while distanceFront > 20 && distanceRight < 50 
-    %     brick.MoveMotor('B', 35);
-    %     brick.MoveMotor('C', 30);
-    %     distanceRight = brick.UltrasonicDist(3);
-    %     distanceFront = brick.UltrasonicDist(4);
-    % end
-    % pause(1);
-    brick.StopMotor('BC'); % All wheels stop
-    % brick.MoveMotorAngleRel('C', 25, -330, 'Coast'); % Brick turns right
-    % brick.MoveMotor('BC',30);
-    % pause(3);
-    brick.StopMotor('BC');
+    if distanceRight < 10
+        brick.MoveMotor('B', -20);
+        pause(1);
+        brick.StopMotor('B');
+    elseif distanceFront > 22 && distanceRight < 50 
+        brick.MoveMotor('BC', 30);
+        pause(1.2);
+    elseif distanceFront < 22 && distanceRight < 15
+        brick.MoveMotor('B', -30);
+        pause(1.5);
+    elseif distanceFront < 20
+        brick.MoveMotor('BC', -20);
+        pause(1);
+        brick.StopMotor('C');
+        brick.MoveMotor('B', -20);
+        pause(32);
+        brick.StopMotor('B');
+    else 
+        brick.MoveMotor('C', -20); % Brick turns right
+        pause(0.8);
+        brick.MoveMotor('BC',30);
+        pause(4);
+   
+    end
     
     % Red
     if color_rgb == 5
         
     end
-
+    
     % Blue
     if color_rgb == 2
         
@@ -60,5 +68,4 @@ while 1
     if color_rgb == 3
         
     end
-
 end
